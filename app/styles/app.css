@@ -1,0 +1,29 @@
+.map-canvas{
+  height: 500px;
+}
+img#about_logo{
+  height: 150px;
+  width: auto;
+}
+#output-gen{ margin:10px;}
+
+
+
+#config-panel{
+  height: 250px;
+
+}
+.gen-output{
+  height:200px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+/*.btn-download {
+  position:absolute;
+  top:0;
+  right:0;
+  z-index:20;
+  padding:5px;
+  background-color:#eee;
+}*/
