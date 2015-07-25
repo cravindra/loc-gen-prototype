@@ -5,20 +5,20 @@
         <legend>Configuration</legend>
 
         <!-- Text input-->
-        <div class="form-group {{if data.swIsValid 'has-success' 'has-warning'}}  has-feedback">
+        <div class="form-group {{if data.p1.isValid 'has-success' 'has-warning'}}  has-feedback">
             <label class="col-md-4 control-label" for="loc_sw">SW Limit</label>
           {{!--bind-attr class="swIsValid:has-success:has-warning"--}}
             <div class="col-md-4">
-              {{input id="swInput" value=data.swText name="swinput" type="text" placeholder="<latitude>,<longitude>" class="form-control input-md"}}
-              {{#if data.swIsDirty}}
-                {{#if data.swIsValid}}
+              {{input id="swInput" value=data.p1Text name="swinput" type="text" placeholder="<latitude>,<longitude>" class="form-control input-md"}}
+              {{#if data.p1.isDirty}}
+                {{#if data.p1.isValid}}
                     <span class="form-control-feedback" aria-hidden="true">{{fa-icon "check"}} </span>
                 {{else}}
                     <span class="form-control-feedback" aria-hidden="true">{{fa-icon "exclamation-triangle"}} </span>
                     <span class="help-block" aria-hidden="true">Ex: 12,13</span>
                 {{/if}}
               {{else}}
-                    <span class="help-block" aria-hidden="true">Ex: 12,13</span>
+                  <span class="help-block" aria-hidden="true">Ex: 12,13</span>
               {{/if}}
 
 
@@ -26,13 +26,13 @@
         </div>
 
         <!-- Text input-->
-        <div class="form-group {{if data.neIsValid 'has-success' 'has-warning'}}  has-feedback">
+        <div class="form-group {{if data.p2.isValid 'has-success' 'has-warning'}}  has-feedback">
             <label class="col-md-4 control-label" for="textinput">NE Limit</label>
 
             <div class="col-md-4">
-              {{input id="neInput" value=data.neText name="neinput" type="text" placeholder="<latitude>,<longitude>" class="form-control input-md"}}
-              {{#if data.neIsDirty}}
-                {{#if data.neIsValid}}
+              {{input id="neInput" value=data.p2Text name="neinput" type="text" placeholder="<latitude>,<longitude>" class="form-control input-md"}}
+              {{#if data.p2.isDirty}}
+                {{#if data.p2.isValid}}
                     <span class="form-control-feedback" aria-hidden="true">{{fa-icon "check"}} </span>
                 {{else}}
                     <span class="form-control-feedback" aria-hidden="true">{{fa-icon "exclamation-triangle"}} </span>
@@ -45,59 +45,15 @@
             </div>
         </div>
 
-        <!-- Multiple Radios -->
-      <!--  <div class="form-group">
-            <label class="col-md-4 control-label" for="radios_output">Output</label>
-
-            <div class="col-md-4">
-                <div class="radio">
-                    <label for="radios_output-0">
-                        <input type="radio" name="radios_output" id="radios_output-0" value="json"
-                               checked="checked">
-                        JSON
-                    </label>
-                </div>
-                <div class="radio">
-                    <label for="radios_output-1">
-                        <input type="radio" name="radios_output" id="radios_output-1" value="csv">
-                        CSV
-                    </label>
-                </div>
-                <div class="radio">
-                    <label for="radios_output-2">
-                        <input type="radio" name="radios_output" id="radios_output-2" value="table">
-                        HTML Table
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        &lt;!&ndash; Multiple Radios (inline) &ndash;&gt;
-        <div class="form-group">
-            <label class="col-md-4 control-label" for="radios_render">Render on Map?</label>
-
-            <div class="col-md-4">
-                <label class="radio-inline" for="radios_render-0">
-                    <input type="radio" name="radios_render" id="radios_render-0" value="true"
-                           checked="checked">
-                    Yes
-                </label>
-                <label class="radio-inline" for="radios_render-1">
-                    <input type="radio" name="radios_render" id="radios_render-1" value="false">
-                    No
-                </label>
-            </div>
-        </div>-->
 
         <!-- Button (Double) -->
         <div class="form-group">
             <label class="col-md-4 control-label" for="btn_gen"></label>
-            <div class="col-md-8"><button id="btn_clear" name="btn_clear" class="btn btn-danger" {{action 'clear'}}>Clear</button>
-            </div>
-          {{!--
-               <button id="btn_gen" name="btn_gen" class="btn btn-success {{if data.isValidated '' 'disabled'}}" {{action 'generate'}}>Generate!</button>
+
+            <div class="col-md-8">
                 <button id="btn_clear" name="btn_clear" class="btn btn-danger" {{action 'clear'}}>Clear</button>
-            --}}
+            </div>
+
         </div>
 
     </fieldset>
