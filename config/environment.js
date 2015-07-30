@@ -49,7 +49,7 @@ module.exports = function(environment) {
     'script-src': "'self' 'unsafe-eval' cdn.leafletjs.com",
     'font-src': "'self' fonts.gstatic.com",
     'connect-src': "'self' maps.gstatic.com",
-    'img-src': "'self' *.tile.osm.org data:",
+    'img-src': "'self' *.tile.osm.org cdn.leafletjs.com data:",
     'style-src': "'self' 'unsafe-inline' cdn.leafletjs.com"
   };
 

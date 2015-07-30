@@ -16,9 +16,7 @@ export default Ember.Component.extend({
 
 
   }.observes('lat', 'lng', 'zoom'),
-
   fit: function () {
-
     try {
       var b = this.get('bounds');
       var map = this.get('map');
@@ -34,7 +32,27 @@ export default Ember.Component.extend({
 
 
   }.observes('bounds'),
+  markerManager: function () {
+    try {
+      var map = this.get('map'), markers = this.get('markers'), layers = this.get('markerLayer');
+      if (!layers) {
+        layers = L.layerGroup();
+        this.set('markerLayer', layers);
+      }
+      layers.clearLayers();
+      if (markers.length > 0) {
+        for (var i = 0; i < markers.length; i++) {
+          var marker=L.marker(markers[i]);
+          layers.addLayer(marker);
+        }
+        layers.addTo(map)
+      }
+      return layers;
+    } catch (e) {
+      console.log('LM: markerLayer(): ' + e);
+    }
 
+  }.observes('markers'),
   didInsertElement: function () {
     var map = L.map(this.get('element'));
     this.set('map', map);
@@ -43,6 +61,8 @@ export default Ember.Component.extend({
     }).addTo(map);
 
     this.setView();
+    map.fitWorld();
+    map.locate({setView: true, maxZoom: 15});
 
     map.on('click', function (mouseEvent) {
       this.send('click', mouseEvent);
@@ -50,7 +70,6 @@ export default Ember.Component.extend({
 
     map.invalidateSize();
   },
-
   willRemoveElement: function () {
     var map = this.get('map');
     if (map) {

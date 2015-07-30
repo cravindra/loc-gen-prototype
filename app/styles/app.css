@@ -1,20 +1,24 @@
-.map-canvas{
+.map-canvas {
   height: 500px;
 }
-img#about_logo{
+
+img#about_logo {
   height: 150px;
   width: auto;
 }
-#output-gen{ margin:10px;}
 
+#output-gen {
+  margin: 10px;
+}
 
-
-#config-panel{
+#config-panel {
   height: 250px;
+  overflow-y: auto;
 
 }
-.gen-output{
-  height:200px;
+
+.gen-output {
+  height: 200px;
   overflow-y: auto;
   overflow-x: auto;
 }

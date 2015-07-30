@@ -4,6 +4,7 @@ import DS from 'ember-data';
 export default DS.Model.extend({
   p1Text: DS.attr('string', {default: ''}),
   p2Text: DS.attr('string', {default: ''}),
+  num: DS.attr('number', {default: ''}),
   p1: Ember.computed('p1Text', function () {
     var isValid = false, isDirty = false, loc = {};
     var text = this.get('p1Text');
@@ -67,14 +68,14 @@ export default DS.Model.extend({
     }
     return null;
   }),
-  points: Ember.computed('isValidated', 'bounds', function () {
+  points: Ember.computed('isValidated', 'bounds','num', function () {
 
     if (this.get('isValidated')) {
-      var bounds = this.get('bounds');
+      var bounds = this.get('bounds'), num=this.get('num');
 
       var lat1 = bounds.sw.lat, lat2 = bounds.ne.lat, lng1 = bounds.sw.lng, lng2 = bounds.ne.lng;
 
-      return this.getLocations(lat1, lng1, lat2, lng2, 10);
+      return this.getLocations(lat1, lng1, lat2, lng2, num||10);
     }
     return [];
   }),
@@ -83,6 +84,8 @@ export default DS.Model.extend({
     //type,autoFitBounds,fitBoundsArray,
     //markers[],polygons[]
     var opts = {};
+    opts.markers=this.get('points');
+
     return opts;
   }),
   getRandomArbitrary: function (min, max) {
