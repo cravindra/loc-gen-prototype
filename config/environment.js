@@ -43,20 +43,14 @@ module.exports = function(environment) {
 
   }
 
-  //Basic config for Google Maps
-  ENV.googleMap = {
-    apiKey:"AIzaSyBjRwqlJ0nuGiHy2zDG5mOEwxjMDdmTMQI",
-    libraries: ['places', 'geometry']
-  };
-
   //Content Security Policies for Maps
   ENV.contentSecurityPolicy = {
     'default-src': "'none'",
-    'script-src': "'self' 'unsafe-eval' *.googleapis.com maps.gstatic.com",
+    'script-src': "'self' 'unsafe-eval' cdn.leafletjs.com",
     'font-src': "'self' fonts.gstatic.com",
     'connect-src': "'self' maps.gstatic.com",
-    'img-src': "'self' *.googleapis.com maps.gstatic.com csi.gstatic.com",
-    'style-src': "'self' 'unsafe-inline' fonts.googleapis.com maps.gstatic.com"
+    'img-src': "'self' *.tile.osm.org data:",
+    'style-src': "'self' 'unsafe-inline' cdn.leafletjs.com"
   };
 
   return ENV;

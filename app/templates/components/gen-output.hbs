@@ -1,25 +1,32 @@
-{{!--{{#if isData}}
-<pre class='gen-output prettyprint'><code class="lang-js">
-{{json}}
-</code>
-</pre>
-{{/if}}--}}
 {{#if isData}}
+
     <ul class="nav nav-tabs" role="tablist">
+
         <li role="presentation" class="active"><a href="#json" aria-controls="json" role="tab"
                                                   data-toggle="tab">JSON</a></li>
         <li role="presentation"><a href="#csv" aria-controls="csv" role="tab" data-toggle="tab">CSV</a></li>
+
+        <li role="presentation"><a href="#meta" aria-controls="meta" role="tab" data-toggle="tab">META-DATA</a></li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
+
         <div role="tabpanel" class="tab-pane active" id="json">
-            <button class="btn-download btn btn-sm btn-block" {{action "downloadJSON"}}>{{fa-icon "download"}} Download</button>
-          <pre class='gen-output prettyprint'><code class="lang-js">{{json}}</code></pre>
+            <button class="btn-download btn btn-sm btn-block" {{action "downloadJSON"}}>{{fa-icon "download"}}Download
+            </button>
+            <pre class='gen-output prettyprint'><code class="lang-js">{{json}}</code></pre>
         </div>
         <div role="tabpanel" class="tab-pane" id="csv">
-            <button class="btn-download btn btn-sm btn-block" {{action "downloadCSV"}}>{{fa-icon "download"}} Download</button>
-          <pre class='gen-output prettyprint'><code class="lang-js">{{csv}}</code></pre>
+            <button class="btn-download btn btn-sm btn-block" {{action "downloadCSV"}}>{{fa-icon "download"}}Download
+            </button>
+            <pre class='gen-output prettyprint'><code class="lang-js">{{csv}}</code></pre>
         </div>
+
+        <div role="tabpanel" class="tab-pane" id="meta">
+
+            <pre class='gen-output prettyprint'><code class="lang-js">{{meta}}</code></pre>
+        </div>
+
     </div>
 {{/if}}

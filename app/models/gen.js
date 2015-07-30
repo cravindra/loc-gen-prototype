@@ -12,8 +12,8 @@ export default DS.Model.extend({
       try {
         var splits = text.trim().split(',', 2);
         loc.lat = parseFloat(splits[0]);
-        loc.lon = parseFloat(splits[1]);
-        isValid = ( (!isNaN(loc.lat)) && loc.lat < 90 && loc.lat > -90 ) && ( (!isNaN(loc.lon)) && loc.lon < 180 && loc.lon > -180);
+        loc.lng = parseFloat(splits[1]);
+        isValid = ( (!isNaN(loc.lat)) && loc.lat < 90 && loc.lat > -90 ) && ( (!isNaN(loc.lng)) && loc.lng < 180 && loc.lng > -180);
       }
       catch (e) {
         console.log('GEN.JS> ' + e);
@@ -24,7 +24,7 @@ export default DS.Model.extend({
       isValid: isValid,
       isDirty: isDirty,
       loc: loc
-    }
+    };
   }),
   p2: Ember.computed('p2Text', function () {
     var isValid = false, isDirty = false, loc = {};
@@ -34,8 +34,8 @@ export default DS.Model.extend({
       try {
         var splits = text.trim().split(',', 2);
         loc.lat = parseFloat(splits[0]);
-        loc.lon = parseFloat(splits[1]);
-        isValid = ( (!isNaN(loc.lat)) && loc.lat < 90 && loc.lat > -90 ) && ( (!isNaN(loc.lon)) && loc.lon < 180 && loc.lon > -180);
+        loc.lng = parseFloat(splits[1]);
+        isValid = ( (!isNaN(loc.lat)) && loc.lat < 90 && loc.lat > -90 ) && ( (!isNaN(loc.lng)) && loc.lng < 180 && loc.lng > -180);
       }
       catch (e) {
         console.log('GEN.JS> ' + e);
@@ -46,7 +46,7 @@ export default DS.Model.extend({
       isValid: isValid,
       isDirty: isDirty,
       loc: loc
-    }
+    };
   }),
 
   isValidated: Ember.computed('p1', 'p2', function () {
@@ -59,9 +59,9 @@ export default DS.Model.extend({
       var sw = {}, ne = {}, p1 = this.get('p1'), p2 = this.get('p2');
 
       sw.lat = (p1.loc.lat < p2.loc.lat) ? p1.loc.lat : p2.loc.lat;
-      sw.lon = (p1.loc.lon < p2.loc.lon) ? p1.loc.lon : p2.loc.lon;
+      sw.lng = (p1.loc.lng < p2.loc.lng) ? p1.loc.lng : p2.loc.lng;
       ne.lat = (p1.loc.lat > p2.loc.lat) ? p1.loc.lat : p2.loc.lat;
-      ne.lon = (p1.loc.lon > p2.loc.lon) ? p1.loc.lon : p2.loc.lon;
+      ne.lng = (p1.loc.lng > p2.loc.lng) ? p1.loc.lng : p2.loc.lng;
 
       return {sw: sw, ne: ne};
     }
@@ -72,25 +72,31 @@ export default DS.Model.extend({
     if (this.get('isValidated')) {
       var bounds = this.get('bounds');
 
-      var lat1 = bounds.sw.lat, lat2 = bounds.ne.lat, lon1 = bounds.sw.lon, lon2 = bounds.ne.lon;
+      var lat1 = bounds.sw.lat, lat2 = bounds.ne.lat, lng1 = bounds.sw.lng, lng2 = bounds.ne.lng;
 
-      return this.getLocations(lat1, lon1, lat2, lon2, 10);
+      return this.getLocations(lat1, lng1, lat2, lng2, 10);
     }
     return [];
+  }),
+  mapOptions: Ember.computed('isValidated', 'bounds', 'points', function () {
+    //lat,lng,zoom
+    //type,autoFitBounds,fitBoundsArray,
+    //markers[],polygons[]
+    var opts = {};
+    return opts;
   }),
   getRandomArbitrary: function (min, max) {
     return Math.random() * (max - min) + min;
   },
-  getLocations: function (lat1, lon1, lat2, lon2, number) {
+  getLocations: function (lat1, lng1, lat2, lng2, number) {
     number = number ? number : 30;
     var res = [];
     for (var i = 0; i < number; i++) {
       var lat = this.getRandomArbitrary(lat1, lat2);
-      var lon = this.getRandomArbitrary(lon1, lon2);
-      res.push({lat: lat, lon: lon});
+      var lng = this.getRandomArbitrary(lng1, lng2);
+      res.push({lat: lat, lng: lng});
     }
-    console.log(JSON.stringify(res));
-    //return JSON.stringify(res);
+
     return res;
   }
 
